@@ -30,7 +30,8 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
-
+  SCKEY: ${{ secrets.SCKEY }}
+  
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -68,6 +69,13 @@ jobs:
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
+
+    - name: 微信通知
+      uses: emon100/Action-Serverchan@v2
+      if: env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
+      with:
+        SCKEY: ${{ secrets.SCKEY }}
+        text: ${{matrix.target}}固件开始编译......
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
@@ -143,6 +151,17 @@ jobs:
         touch release.txt
         echo "请自行测试固件可用性" >> release.txt
         echo "::set-output name=status::success"
+        
+    - name: 微信通知
+      uses: emon100/Action-Serverchan@v2
+      if: steps.organizer.outputs.status == 'success' && env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
+      with:
+        SCKEY: ${{ secrets.SCKEY }}
+        text: ${{matrix.target}}固件编译成功！
+        desp: ${{ env.WXFB_MESSAGE }}固件成功编译完成了！
+              
+              完成时间：${{ env.date1 }}
+     
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
