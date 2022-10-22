@@ -10,7 +10,7 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 #修改默认IP
-sed -i 's/192.168.1.1/192.168.1.1/g' package/base-files/files/bin/config_generate   # 定制默认IP
+sed -i 's/192.168.1.1/192.168.10.99/g' package/base-files/files/bin/config_generate   # 定制默认IP
 
 sed -i "s/OpenWrt /281677160 build $(TZ=UTC-8 date "+%Y.%m.%d")/$(TZ=UTC+8 date "+%Y.%m.%d")/g" package/lean/default-settings/files/zzz-default-settings
 # 移除重复软件包
