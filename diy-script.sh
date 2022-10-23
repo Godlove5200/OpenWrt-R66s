@@ -19,6 +19,10 @@ sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/auto
 # Cpufreq
 sed -i 's/services/system/g' feeds/luci/applications/luci-app-cpufreq/luasrc/controller/cpufreq.lua
 
+# 添加第三方软件包
+git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
+git clone https://github.com/kenzok8/small-package package/small-package
+
 # 移除重复软件包
 rm -rf feeds/packages/net/mosdns
 rm -rf feeds/luci/themes/luci-theme-argon
@@ -64,15 +68,15 @@ svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/l
 #svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-go package/trojan-go
 #svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-plus package/trojan-plus
 #svn co https://github.com/xiaorouji/openwrt-passwall/trunk/v2ray-geodata package/v2ray-geodata
-svn co https://github.com/fw876/helloworld/trunk/simple-obfs package/simple-obfs
-svn co https://github.com/fw876/helloworld/trunk/v2ray-core package/v2ray-core
-svn co https://github.com/fw876/helloworld/trunk/v2ray-plugin package/v2ray-plugin
-svn co https://github.com/fw876/helloworld/trunk/shadowsocks-rust package/shadowsocks-rust
-svn co https://github.com/fw876/helloworld/trunk/shadowsocksr-libev package/shadowsocksr-libev
-svn co https://github.com/fw876/helloworld/trunk/xray-core package/xray-core
-svn co https://github.com/fw876/helloworld/trunk/xray-plugin package/xray-plugin
-svn co https://github.com/fw876/helloworld/trunk/lua-neturl package/lua-neturl
-svn co https://github.com/fw876/helloworld/trunk/trojan package/trojan
+#svn co https://github.com/fw876/helloworld/trunk/simple-obfs package/simple-obfs
+#svn co https://github.com/fw876/helloworld/trunk/v2ray-core package/v2ray-core
+#svn co https://github.com/fw876/helloworld/trunk/v2ray-plugin package/v2ray-plugin
+#svn co https://github.com/fw876/helloworld/trunk/shadowsocks-rust package/shadowsocks-rust
+#svn co https://github.com/fw876/helloworld/trunk/shadowsocksr-libev package/shadowsocksr-libev
+#svn co https://github.com/fw876/helloworld/trunk/xray-core package/xray-core
+#svn co https://github.com/fw876/helloworld/trunk/xray-plugin package/xray-plugin
+#svn co https://github.com/fw876/helloworld/trunk/lua-neturl package/lua-neturl
+#svn co https://github.com/fw876/helloworld/trunk/trojan package/trojan
 
 # Themes
 git clone --depth 1 -b 18.06 https://github.com/kiddin9/luci-theme-edge package/luci-theme-edge
@@ -87,7 +91,7 @@ svn co https://github.com/haiibo/packages/trunk/luci-theme-netgear package/luci-
 
 # 晶晨宝盒
 svn co https://github.com/ophub/luci-app-amlogic/trunk/luci-app-amlogic package/luci-app-amlogic
-sed -i "s|https.*/OpenWrt|https://github.com/haiibo/OpenWrt|g" package/luci-app-amlogic/root/etc/config/amlogic
+sed -i "s|https.*/OpenWrt|https://github.com/Godlove5200/OpenWrt-R66s|g" package/luci-app-amlogic/root/etc/config/amlogic
 sed -i "s|opt/kernel|https://github.com/ophub/kernel/tree/main/pub/stable|g" package/luci-app-amlogic/root/etc/config/amlogic
 sed -i "s|ARMv8|ARMv8_PLUS|g" package/luci-app-amlogic/root/etc/config/amlogic
 
